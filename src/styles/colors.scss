@@ -1,0 +1,43 @@
+$primary: #753918;
+$secondary: #f7c35f;
+$white: #fff;
+$green: #3ac722;
+$gray: #bbb1b2;
+$red: #ff0000;
+$yellow: #f09f00;
+$d9: #d9d9d9;
+$inputBorderColor: rgba(153, 153, 153, 1);
+$success: #3ac722;
+$f2: #f2f2f2;
+$primaryOpacity: #708dcb;
+$orange: rgba(230, 213, 0, 0.5);
+$danger: #ff0000;
+$lightPrimary: #f2f1ff;
+$secondaryInputBorderColor: #b8c5e0;
+$ef: #efefef;
+$disableBgColor: #34333063;
+$minGrayColor: rgba(0, 0, 0, 0.45);
+$primaryLight: #d0e0ff;
+
+:root {
+  --bnr-primary: #{$primary};
+  --bnr-secondary: #{$secondary};
+  --bnr-white: #{$white};
+  --bnr-green: #{$green};
+  --bnr-gray: #{$gray};
+  --bnr-red: #{$red};
+  --bnr-yellow: #{$yellow};
+  --bnr-d9: #{$d9};
+  --bnr-input-border: #{$inputBorderColor};
+  --bnr-success: #{$success};
+  --bnr-f2: #{$f2};
+  --bnr-primary-opacity: #{$primaryOpacity};
+  --bnr-orange: #{$orange};
+  --bnr-danger: #{$danger};
+  --bnr-light-primary: #{$lightPrimary};
+  --bnr-secondary-input-border: #{$secondaryInputBorderColor};
+  --bnr-ef: #{$ef};
+  --bnr-disable-bg: #{$disableBgColor};
+  --bnr-min-gray: #{$minGrayColor};
+  --bnr-primary-light: #{$primaryLight};
+}

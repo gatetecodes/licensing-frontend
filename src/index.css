@@ -1,0 +1,328 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--bnr-primary);
+  --color-secondary: var(--bnr-secondary);
+  --color-success: var(--bnr-success);
+  --color-danger: var(--bnr-danger);
+  --color-warning: var(--bnr-yellow);
+  --color-muted: var(--bnr-gray);
+}
+
+@font-face {
+  font-family: "Rec Mono Linear";
+  src: url("./assets/fonts/RecMonoLinear-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rec Mono Linear";
+  src: url("./assets/fonts/RecMonoLinear-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rec Mono Linear";
+  src: url("./assets/fonts/RecMonoLinear-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Rec Mono Linear", "Segoe UI", sans-serif;
+  --bg-app: #f6f8fb;
+  --bg-surface: var(--bnr-white);
+  --text-primary: var(--bnr-primary);
+  --text-secondary: var(--bnr-min-gray);
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-app);
+}
+
+.app-layout {
+  min-height: 100vh;
+  background: var(--bg-app);
+}
+
+.app-content {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: min(520px, 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.auth-form {
+  margin-top: 16px;
+}
+
+.auth-error-alert {
+  margin-bottom: 16px;
+}
+
+.auth-links {
+  margin-top: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dashboard-shell {
+  min-height: 100vh;
+}
+
+/* Sidebar Menu: active item (Ant Design uses .ant-menu-item-selected) */
+.dashboard-shell-menu.ant-menu .ant-menu-item-selected {
+  background-color: color-mix(in srgb, var(--bnr-primary) 14%, transparent) !important;
+  color: var(--bnr-primary) !important;
+}
+
+.dashboard-shell-menu.ant-menu .ant-menu-item-selected .anticon {
+  color: var(--bnr-primary) !important;
+}
+
+.dashboard-sider {
+  background: linear-gradient(180deg, var(--bnr-primary) 0%, #4f1f08 100%) !important;
+  padding: 12px 10px;
+}
+
+.dashboard-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sider-brand {
+  padding: 10px 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.brand-title {
+  color: var(--bnr-white) !important;
+  margin: 0 !important;
+}
+
+.brand-caption {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 12px;
+}
+
+.dashboard-menu {
+  background: transparent !important;
+  border-inline-end: none !important;
+}
+
+.dashboard-menu .ant-menu-item {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.dashboard-menu .ant-menu-item .anticon {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.dashboard-menu .ant-menu-item-selected {
+  background: rgba(247, 195, 95, 0.24) !important;
+  color: var(--bnr-white) !important;
+}
+
+.dashboard-header {
+  background: var(--bnr-white) !important;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 18px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+}
+
+.header-eyebrow {
+  display: block;
+  color: var(--bnr-min-gray);
+  font-size: 12px;
+}
+
+.header-page-title {
+  margin: 0 !important;
+  color: var(--bnr-primary) !important;
+}
+
+.user-name {
+  color: var(--bnr-primary) !important;
+}
+
+.dashboard-content {
+  padding: 16px;
+}
+
+.dashboard-content-inner {
+  min-height: calc(100vh - 164px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-title {
+  margin: 0 !important;
+}
+
+.page-subtitle {
+  margin: 0 !important;
+}
+
+.metric-card,
+.dashboard-section-card,
+.module-placeholder-card {
+  border-radius: 12px !important;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  border: 1px solid color-mix(in srgb, var(--bnr-primary) 10%, transparent) !important;
+}
+
+.ant-card {
+  border-color: color-mix(in srgb, var(--bnr-primary) 10%, transparent) !important;
+}
+
+.ant-card-head {
+  border-bottom-color: color-mix(in srgb, var(--bnr-primary) 10%, transparent) !important;
+}
+
+.module-placeholder-title {
+  margin: 0 !important;
+}
+
+.module-placeholder-description {
+  margin: 0 !important;
+}
+
+.dashboard-footer {
+  background: transparent !important;
+  padding: 8px 16px 18px !important;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.status-dot-neutral {
+  background: #9ca3af;
+}
+
+.status-dot-blue {
+  background: #3b82f6;
+}
+
+.status-dot-cyan {
+  background: #06b6d4;
+}
+
+.status-dot-orange {
+  background: #f97316;
+}
+
+.status-dot-amber {
+  background: #f59e0b;
+}
+
+.status-dot-purple {
+  background: #8b5cf6;
+}
+
+.status-dot-teal {
+  background: #66b2b2;
+}
+
+.status-dot-green {
+  background: #22c55e;
+}
+
+.status-dot-red {
+  background: #ef4444;
+}
+
+.page-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* BNR Table Styles */
+.bnr-table .ant-table-thead > tr > th {
+  background-color: color-mix(in srgb, var(--bnr-primary) 5%, transparent) !important;
+  color: var(--bnr-primary) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid color-mix(in srgb, var(--bnr-primary) 15%, transparent) !important;
+  padding-block: 14px !important;
+}
+
+.bnr-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: color-mix(in srgb, var(--bnr-primary) 2%, transparent) !important;
+}
+
+.bnr-table .ant-table-cell {
+  border-bottom: 1px solid color-mix(in srgb, var(--bnr-primary) 10%, transparent) !important;
+}
+
+.bnr-table.ant-table-wrapper .ant-table-container {
+  border: 1px solid color-mix(in srgb, var(--bnr-primary) 10%, transparent) !important;
+  border-bottom: none !important;
+  border-radius: 8px;
+}
