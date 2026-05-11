@@ -105,9 +105,9 @@ const ApplicationsPage = () => {
       ? editingDraft.id
       : undefined,
   );
-  const docsQuery = useApplicationDocuments(
-    editingDraft?.id ?? selectedId ?? undefined,
-  );
+  const documentsApplicationId =
+    editingDraft?.id ?? draftInWizard?.id ?? selectedId ?? undefined;
+  const docsQuery = useApplicationDocuments(documentsApplicationId);
   const createDraftMutation = useCreateApplicationDraft();
   const updateDraftMutation = useUpdateApplicationDraft();
   const submitMutation = useSubmitApplication();
@@ -615,6 +615,7 @@ const ApplicationsPage = () => {
         <NewApplication
           form={createForm}
           applicationId={draftInWizard?.id}
+          missingRequiredDocuments={missingRequiredDocuments}
           uploadedDocsMap={uploadedDocsMap}
           onViewDocument={handleViewDocument}
           onStepSave={async () => createDraft({ closeAfterSave: false })}
@@ -731,13 +732,16 @@ const ApplicationsPage = () => {
                 return;
               }
               const result = await updateDraft(editingDraft, {
-                closeAfterSave: true,
+                closeAfterSave: false,
                 showMessage: false,
                 validateBeforeSave: true,
               });
               if (result.application) {
                 const msg = await submitApplication(result.application);
-                setEditingDraft(null);
+                if (msg === "Application submitted") {
+                  setIsUpdateModalOpen(false);
+                  setEditingDraft(null);
+                }
                 return msg;
               }
               return "Unable to save draft.";
