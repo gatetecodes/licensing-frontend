@@ -13,7 +13,7 @@ import { configureAxiosApiClient } from "./lib/axios";
 configureAxiosApiClient({
   queryClient,
   onUnauthorized: () => {
-    void router.navigate({ to: "/login" });
+     router.navigate({ to: "/login" });
   },
 });
 

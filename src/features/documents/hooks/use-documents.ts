@@ -25,11 +25,11 @@ export const useUploadDocumentMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: documentsService.upload,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["documents", "list"],
+    onSuccess: (_data, variables) => {
+       queryClient.invalidateQueries({
+        queryKey: documentQueryKeys.list(variables.applicationId),
       });
-      queryClient.invalidateQueries({ queryKey: ["applications"] });
+       queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
   });
 };
