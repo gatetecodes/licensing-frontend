@@ -126,7 +126,7 @@ Source of truth for seed values: backend `.env` + `src/database/seed.ts`.
 
 All seeded users use the same seeded password above unless backend seed env values are changed.
 
-## Seeded applications (current implementation behavior)
+## Seeded applications
 
 - `BNR-SEED-SUBMITTED-0001`
 - `BNR-SEED-READY-0001`
@@ -134,6 +134,8 @@ All seeded users use the same seeded password above unless backend seed env valu
 Both are currently seeded into `DRAFT` state by the active seed script.
 
 This is intentional for draft-first walkthroughs.
+
+Therefore, it is recommended to first log in as an applicant, complete the application process through to submission, and subsequently have internal BNR users proceed with further actions.
 
 ## How to Use the System End-to-End
 
