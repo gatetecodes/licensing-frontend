@@ -18,6 +18,12 @@ const VerifyEmailPage = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const hasTriggeredAutoVerifyRef = useRef(false);
 
+  const justRegistered = search.registered === "1";
+  const registeredEmail =
+    typeof search.email === "string" && search.email.trim()
+      ? search.email.trim()
+      : null;
+
   const token = useMemo(() => {
     const parsed = verifyEmailTokenSchema.safeParse({
       token: typeof search.token === "string" ? search.token : "",
@@ -65,14 +71,34 @@ const VerifyEmailPage = () => {
       {submitError ? (
         <Alert className="auth-error-alert" type="error" showIcon message={submitError} />
       ) : null}
+      {!token && justRegistered ? (
+        <Alert
+          type="success"
+          showIcon
+          message="Registration successful"
+          description={
+            registeredEmail
+              ? `We sent a verification link to ${registeredEmail}. Open that email to activate your account.`
+              : "We sent a verification link to your email address. Open that email to activate your account."
+          }
+        />
+      ) : null}
       <Alert
-        type={token ? "info" : "warning"}
+        type={token ? "info" : justRegistered ? "info" : "warning"}
         showIcon
-        message={token ? "Ready to verify" : "Verification token missing"}
+        message={
+          token
+            ? "Ready to verify"
+            : justRegistered
+              ? "Check your verification email"
+              : "Verification token missing"
+        }
         description={
           token
             ? "Verification is triggered automatically. You can also retry manually."
-            : "Open this page from your verification email link."
+            : justRegistered
+              ? "Use the verification link in your email. This page verifies accounts only when opened from that link."
+              : "Open this page from your verification email link."
         }
       />
       <Button
@@ -86,7 +112,7 @@ const VerifyEmailPage = () => {
         Verify Email Again
       </Button>
       <div className="auth-links">
-        <Link to="/login">Back to login</Link>
+        <Link to="/login" className="text-primary!">Back to login</Link>
       </div>
     </AuthLayout>
   );

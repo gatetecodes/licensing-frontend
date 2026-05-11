@@ -99,7 +99,7 @@ const SetPasswordPage = () => {
       </Form>
 
       <div className="auth-links">
-        <Link to="/login">Back to login</Link>
+        <Link to="/login" className="text-primary!">Back to login</Link>
       </div>
     </AuthLayout>
   );

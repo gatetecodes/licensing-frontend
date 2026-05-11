@@ -397,11 +397,15 @@ const ReviewQueuePage = () => {
         {selectedApplication ? (
           <Space direction="vertical" className="w-full">
             <StatusIndicator status={selectedApplication.current_state} />
-            {selectedApplication.current_state === "INFO_REQUESTED" ? (
+            {selectedApplication.latest_info_request ? (
               <Alert
                 type="warning"
                 showIcon
-                message="Information Requested"
+                message={
+                  selectedApplication.current_state === "INFO_REQUESTED"
+                    ? "Information Requested"
+                    : "Latest Information Request Cycle"
+                }
                 description={
                   <Space direction="vertical" size={4}>
                     <Typography.Text type="secondary">
@@ -426,11 +430,48 @@ const ReviewQueuePage = () => {
                       selectedApplication.latest_info_request?.request_items ??
                       []
                     ).map((item, index) => (
-                      <Typography.Text key={item.id}>
-                        {index + 1}. {item.type.replaceAll("_", " ")}:{" "}
-                        {item.instruction}
-                      </Typography.Text>
+                      <Space
+                        key={item.id}
+                        direction="vertical"
+                        size={0}
+                        className="w-full"
+                      >
+                        <Typography.Text>
+                          {index + 1}. {item.type.replaceAll("_", " ")}:{" "}
+                          {item.instruction}
+                        </Typography.Text>
+                        {item.type === "OPEN_QUESTION" ? (
+                          <Typography.Text type="secondary">
+                            Applicant response:{" "}
+                            {selectedApplication.latest_info_request?.applicant_responses
+                              ?.find(
+                                (response) =>
+                                  response.request_item_id === item.id,
+                              )
+                              ?.answer_text?.trim() || "No response submitted"}
+                          </Typography.Text>
+                        ) : null}
+                        {(item.type === "DOCUMENT_REPLACEMENT" ||
+                          item.type === "ADDITIONAL_DOCUMENT") &&
+                        item.document_type ? (
+                          <Typography.Text type="secondary">
+                            Document update:{" "}
+                            {uploadedDocsMap.has(item.document_type)
+                              ? "Uploaded"
+                              : "Not uploaded"}
+                          </Typography.Text>
+                        ) : null}
+                      </Space>
                     ))}
+                    <Typography.Text type="secondary">
+                      Responded at:{" "}
+                      {selectedApplication.latest_info_request?.responded_at
+                        ? new Date(
+                            selectedApplication.latest_info_request
+                              .responded_at,
+                          ).toLocaleString()
+                        : "N/A"}
+                    </Typography.Text>
                   </Space>
                 }
               />
@@ -777,7 +818,7 @@ const ReviewQueuePage = () => {
               <>
                 <div className="flex flex-col gap-4">
                   <Alert
-                    type="info"
+                    type="warning"
                     showIcon
                     message="Marking for Decision"
                     description="This will transition the application to the 'Ready for Decision' state, notifying the approvers that the review is complete."
@@ -843,58 +884,58 @@ const ReviewQueuePage = () => {
                     />
                   </div>
 
-                <div className="flex justify-end pt-4 border-t border-gray-100">
-                  <Space size="middle">
-                    <Button onClick={resetActionState}>Cancel</Button>
-                    <Button
-                      danger
-                      loading={isBusy}
-                      onClick={() => {
-                        if (!decisionReason.trim()) {
-                          feedback.error(
-                            "Please provide a reason for rejection.",
+                  <div className="flex justify-end pt-4 border-t border-gray-100">
+                    <Space size="middle">
+                      <Button onClick={resetActionState}>Cancel</Button>
+                      <Button
+                        danger
+                        loading={isBusy}
+                        onClick={() => {
+                          if (!decisionReason.trim()) {
+                            feedback.error(
+                              "Please provide a reason for rejection.",
+                            );
+                            return;
+                          }
+                          void mutateWithFeedback(
+                            () =>
+                              reject.mutateAsync({
+                                id: actionApplication.id,
+                                lock_version: actionApplication.lock_version,
+                                decision_reason: decisionReason,
+                              }),
+                            "Application rejected.",
                           );
-                          return;
-                        }
-                        void mutateWithFeedback(
-                          () =>
-                            reject.mutateAsync({
-                              id: actionApplication.id,
-                              lock_version: actionApplication.lock_version,
-                              decision_reason: decisionReason,
-                            }),
-                          "Application rejected.",
-                        );
-                      }}
-                    >
-                      Reject Application
-                    </Button>
-                    <Button
-                      type="primary"
-                      className="bg-green-600 hover:bg-green-500 border-green-600 shadow-none!"
-                      loading={isBusy}
-                      onClick={() => {
-                        if (!decisionReason.trim()) {
-                          feedback.error(
-                            "Please provide a reason for approval.",
+                        }}
+                      >
+                        Reject Application
+                      </Button>
+                      <Button
+                        type="primary"
+                        className="bg-green-600 hover:bg-green-500 border-green-600 shadow-none!"
+                        loading={isBusy}
+                        onClick={() => {
+                          if (!decisionReason.trim()) {
+                            feedback.error(
+                              "Please provide a reason for approval.",
+                            );
+                            return;
+                          }
+                          void mutateWithFeedback(
+                            () =>
+                              approve.mutateAsync({
+                                id: actionApplication.id,
+                                lock_version: actionApplication.lock_version,
+                                decision_reason: decisionReason,
+                              }),
+                            "Application approved successfully.",
                           );
-                          return;
-                        }
-                        void mutateWithFeedback(
-                          () =>
-                            approve.mutateAsync({
-                              id: actionApplication.id,
-                              lock_version: actionApplication.lock_version,
-                              decision_reason: decisionReason,
-                            }),
-                          "Application approved successfully.",
-                        );
-                      }}
-                    >
-                      Approve Application
-                    </Button>
-                  </Space>
-                </div>
+                        }}
+                      >
+                        Approve Application
+                      </Button>
+                    </Space>
+                  </div>
                 </div>
               </>
             ) : null}
