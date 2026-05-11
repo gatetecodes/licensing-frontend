@@ -97,7 +97,7 @@ const ProtectedLayout = () => {
       return;
     }
     if (!session.isAuthenticated) {
-      void navigate({ to: "/login" });
+       navigate({ to: "/login" });
     }
   }, [session.isAuthenticated, session.isLoading, navigate]);
 

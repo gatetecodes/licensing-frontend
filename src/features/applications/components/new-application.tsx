@@ -403,7 +403,7 @@ const NewApplication = ({
             type={successFeedback ? "default" : "primary"}
             className={successFeedback ? "border-green-500 text-green-600" : ""}
             loading={(isNextLoading || isSubmitting) && !successFeedback}
-            onClick={() => void handleNext()}
+            onClick={() =>  handleNext()}
           >
             {successFeedback ? (
               <span className="flex items-center gap-2">

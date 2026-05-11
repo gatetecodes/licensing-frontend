@@ -460,7 +460,7 @@ const RespondToRequest = ({
       ) : null}
 
       <Space className="w-full justify-end">
-        <Button loading={isSubmitting} onClick={() => void onSaveUpdates()}>
+        <Button loading={isSubmitting} onClick={() =>  onSaveUpdates()}>
           Save Updates
         </Button>
         <Button
@@ -471,7 +471,7 @@ const RespondToRequest = ({
             if (!validateOpenQuestions()) {
               return;
             }
-            void onResubmit(collectResponses());
+             onResubmit(collectResponses());
           }}
         >
           Resubmit Application

@@ -58,7 +58,7 @@ const VerifyEmailPage = () => {
       return;
     }
     hasTriggeredAutoVerifyRef.current = true;
-    void handleVerify();
+     handleVerify();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, verifyMutation.isPending]);
 
@@ -107,7 +107,7 @@ const VerifyEmailPage = () => {
         size="large"
         loading={verifyMutation.isPending}
         disabled={!token}
-        onClick={() => void handleVerify()}
+        onClick={() =>  handleVerify()}
       >
         Verify Email Again
       </Button>

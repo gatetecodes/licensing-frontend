@@ -300,7 +300,7 @@ const DocumentsPage = () => {
                           key: "view-latest",
                           label: "View Latest",
                           onClick: () =>
-                            void handleViewDocument(
+                             handleViewDocument(
                               record.latest_version!.id,
                               record.document_type,
                             ),
@@ -309,7 +309,7 @@ const DocumentsPage = () => {
                           key: "download-latest",
                           label: "Download Latest",
                           onClick: () =>
-                            void handleDownload(record.latest_version!.id),
+                             handleDownload(record.latest_version!.id),
                         },
                       ]
                     : []),
@@ -351,7 +351,7 @@ const DocumentsPage = () => {
                     type="link"
                     className="text-primary! hover:underline!"
                     onClick={() =>
-                      void handleViewDocument(record.id, record.original_filename)
+                       handleViewDocument(record.id, record.original_filename)
                     }
                   >
                     View
@@ -359,7 +359,7 @@ const DocumentsPage = () => {
                   <Button
                     type="link"
                     className="text-primary! hover:underline!"
-                    onClick={() => void handleDownload(record.id)}
+                    onClick={() =>  handleDownload(record.id)}
                   >
                     Download
                   </Button>
@@ -374,7 +374,7 @@ const DocumentsPage = () => {
         title="Upload Document"
         open={isUploadModalOpen}
         onCancel={() => setIsUploadModalOpen(false)}
-        onOk={() => void handleUpload()}
+        onOk={() =>  handleUpload()}
         okText="Upload"
         confirmLoading={uploadMutation.isPending}
       >

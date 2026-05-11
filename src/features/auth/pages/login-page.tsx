@@ -139,7 +139,10 @@ const LoginPage = () => {
         </Form>
 
         <div className=" mt-5! text-center">
-          Don't have an account? <Link className="text-primary!" to="/register">Create applicant account</Link>
+          Want to apply for a license and don't have an account?{" "}
+          <Link className="text-primary! hover:underline!" to="/register">
+            Create applicant account
+          </Link>
         </div>
       </div>
     </AuthLayout>
