@@ -2,8 +2,7 @@
 
 Frontend application for the **Bank Licensing & Compliance Portal**.
 
-This UI is deployed at: `https://bnr-licensing.usecarelogic.com` and works with the deployed backend API at:
-`https://bnr-licensing-core.usecarelogic.com`
+This UI is deployed at: [https://bnr-licensing.usecarelogic.com](https://bnr-licensing.usecarelogic.com) and works with the deployed backend API at: [https://bnr-licensing-core.usecarelogic.com](https://bnr-licensing-core.usecarelogic.com)
 
 It supports applicant onboarding, draft-to-decision application lifecycle, document versioning, internal review/approval workflows, admin user management, and audit trail visibility.
 
